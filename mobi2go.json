@@ -1,50 +1,58 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Travels API",
-    "description": "DescriÃ§Ã£o",
-    "contact": {
-      "name": "Sentran",
-      "email": "Sentran@Sentran.com.br"
-    },
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    },
-    "version": "1.0"
+    "title": "API Mobi2Go",
+    "version": "1.0.0",
+    "description": "API para acessar funcionalidades do Mobi2Go, incluindo a recupera��o de informações de pessoas por CPF."
   },
+  "servers": [
+    {
+      "url": "https://mobi2go-homologa-web.azurewebsites.net/api/v1/gateway-api.asmx"
+    }
+  ],
   "paths": {
-    "/gateway/pessoaexiste": {
+    "/RecuperarPessoaPorCPF": {
       "post": {
-        "tags": [
-          "Travels"
-        ],
+        "summary": "Recuperar informa��es de pessoa pelo CPF",
+        "description": "Este endpoint recupera informa��es de uma pessoa a partir de seu CPF.",
+        "operationId": "recuperarPessoaPorCPF",
         "requestBody": {
+          "required": true,
           "content": {
-            "multipart/form-data": {
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cpf": {
-                    "type": "string"
+                  "_cpf": {
+                    "type": "string",
+                    "description": "N�mero do CPF da pessoa a ser recuperada.",
+                    "example": "12345678909"
                   }
-                }
-              },
-              "encoding": {
-                "cpf": {
-                  "style": "form"
-                }
+                },
+                "required": [ "_cpf" ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Opera��o bem-sucedida. Retorna as informa��es da pessoa.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisi��o inv�lida. CPF n�o fornecido ou malformado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
           }
         }
       }
     }
-  },
-  "components": {}
+  }
 }
