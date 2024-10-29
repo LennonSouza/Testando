@@ -1,0 +1,58 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Mobi2Go",
+    "version": "1.0.0",
+    "description": "API para acessar funcionalidades do Mobi2Go, incluindo a recuperação de informações de pessoas por CPF."
+  },
+  "servers": [
+    {
+      "url": "https://mobi2go-homologa-web.azurewebsites.net/api/v1/gateway-api.asmx"
+    }
+  ],
+  "paths": {
+    "/RecuperarPessoaPorCPF": {
+      "post": {
+        "summary": "Recuperar informações de pessoa pelo CPF",
+        "description": "Este endpoint recupera informações de uma pessoa a partir de seu CPF.",
+        "operationId": "recuperarPessoaPorCPF",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_cpf": {
+                    "type": "string",
+                    "description": "Número do CPF da pessoa a ser recuperada.",
+                    "example": "12345678909"
+                  }
+                },
+                "required": [ "_cpf" ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida. Retorna as informações da pessoa.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida. CPF não fornecido ou malformado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    }
+  }
+}
