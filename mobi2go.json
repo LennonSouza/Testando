@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Travels API",
-    "description": "Descrição",
+    "description": "DescriÃ§Ã£o",
     "contact": {
       "name": "Sentran",
       "email": "Sentran@Sentran.com.br"
@@ -14,7 +14,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/v1/pessoaexiste": {
+    "/gateway/pessoaexiste": {
       "post": {
         "tags": [
           "Travels"
@@ -46,7 +46,5 @@
       }
     }
   },
-  "components": {
-
-  }
+  "components": {}
 }
